@@ -21,6 +21,7 @@ let listArrays = [];
 
 // Drag Functionality
 let draggedItem;
+let currentColumn;
 
 // Get Arrays from localStorage if available, set default values if not
 const getSavedColumns = () => {
@@ -61,17 +62,13 @@ const updateSavedColumns = () => {
 
 // Create DOM Elements for each list item
 const createItemEl = (columnEl, column, item, index) => {
-  // console.log("columnEl:", columnEl);
-  // console.log("column:", column);
-  // console.log("item:", item);
-  // console.log("index:", index);
   // List Item
   const listEl = document.createElement("li");
   listEl.classList.add("drag-item");
   listEl.textContent = item;
   listEl.draggable = true;
-  listEl.setAttribute('ondragstart', 'dragstart(event)');
-  columnEl.appendChild(listEl)
+  listEl.setAttribute("ondragstart", "dragstart(event)");
+  columnEl.appendChild(listEl);
 };
 
 // Update Columns in DOM - Reset HTML, Filter Array, Update localStorage
@@ -105,26 +102,56 @@ const updateDOM = () => {
     createItemEl(onholdList, 0, item, index);
   });
   // Run getSavedColumns only once, Update Local Storage
+  updatedOnLoad = true;
+  updateSavedColumns();
 };
 
+const rebuildArrays = () => {
+  backlogListArray = [];
+  for (let i = 0; i < backlogList.children.length; i++) {
+    backlogListArray.push(backlogList.children[i].textContent);
+  }
+
+  progressListArray = [];
+  for (let i = 0; i < progressList.children.length; i++) {
+    progressListArray.push(progressList.children[i].textContent);
+  }
+
+  completeListArray = [];
+  for (let i = 0; i < completeList.children.length; i++) {
+    completeListArray.push(completeList.children[i].textContent);
+  }
+
+  onholdListArray = [];
+  for (let i = 0; i < onholdList.children.length; i++) {
+    onholdListArray.push(onholdList.children[i].textContent);
+  }
+
+  updateDOM();
+};
 
 const dragstart = (event) => {
   draggedItem = event.target;
-  console.log('draggedItem: ', draggedItem)
-}
+};
 
 const allowDrop = (event) => {
   event.preventDefault();
-  
-}
+};
 
-const dragEnter = (column)=>{
-  listColumns[column].classList.add('over')
-}
+const dragEnter = (column) => {
+  listColumns[column].classList.add("over");
+  currentColumn = column;
+};
 
 const drop = (event) => {
   event.preventDefault();
+  listColumns.forEach((column) => {
+    column.classList.remove("over");
+  });
 
-}
+  const parentElement = listColumns[currentColumn];
+  parentElement.appendChild(draggedItem);
+  rebuildArrays();
+};
 
 updateDOM();
