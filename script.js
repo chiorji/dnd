@@ -32,14 +32,22 @@ const getSavedColumns = () => {
     completeListArray = JSON.parse(localStorage.completeItems);
     onholdListArray = JSON.parse(localStorage.onholdItems);
   } else {
-    backlogListArray = ["Release the course", "Sit back and relax"];
-    progressListArray = ["Work on projects", "Listen to music"];
-    completeListArray = ["Being cool", "Getting stuff done"];
-    onholdListArray = ["Being uncool"];
+    backlogListArray = [
+      "Learn data structures and algorithm",
+      "Learn JavaScript",
+    ];
+    progressListArray = [
+      "Work on side projects",
+      "Listen to music",
+      "Read COS 124 material",
+    ];
+    completeListArray = ["Getting stuff done"];
+    onholdListArray = [
+      "Release a music album",
+      "Learn Python for Data Science",
+    ];
   }
 };
-
-// getSavedColumns();
 
 // Set localStorage Arrays
 const updateSavedColumns = () => {
@@ -50,7 +58,6 @@ const updateSavedColumns = () => {
     onholdListArray,
   ];
   const arrayNames = ["backlog", "progress", "complete", "onhold"];
-
   arrayNames.forEach((arrayName, index) => {
     localStorage.setItem(
       arrayName + "Items",
@@ -151,32 +158,20 @@ const hideInputBox = (column) => {
 };
 
 const rebuildArrays = () => {
-  backlogListArray = [];
-  for (let i = 0; i < backlogList.children.length; i++) {
-    backlogListArray.push(backlogList.children[i].textContent);
-  }
-
-  progressListArray = [];
-  for (let i = 0; i < progressList.children.length; i++) {
-    progressListArray.push(progressList.children[i].textContent);
-  }
-
-  completeListArray = [];
-  for (let i = 0; i < completeList.children.length; i++) {
-    completeListArray.push(completeList.children[i].textContent);
-  }
-
-  onholdListArray = [];
-  for (let i = 0; i < onholdList.children.length; i++) {
-    onholdListArray.push(onholdList.children[i].textContent);
-  }
-
+  backlogListArray = Array.from(backlogList.children).map((i) => i.textContent);
+  progressListArray = Array.from(progressList.children).map(
+    (i) => i.textContent
+  );
+  completeListArray = Array.from(completeList.children).map(
+    (i) => i.textContent
+  );
+  onholdListArray = Array.from(onholdList.children).map((i) => i.textContent);
   updateDOM();
 };
 
 const dragstart = (event) => {
-  draggingItem = true;
   draggedItem = event.target;
+  draggingItem = true;
 };
 
 const allowDrop = (event) => {
