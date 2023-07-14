@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1 class="main-title">Kanban Board</h1>
+    <h1 class="main-title">Minimal Kanban Board</h1>
     <div class="drag-container">
       <ul class="drag-list">
         <!-- Backlog -->
@@ -23,16 +23,16 @@
               ondrop="drop(event)"
               ondragover="allowDrop(event)"
               ondragenter="dragEnter(0)"
+              ondragleave="dragLeave(event)"
             ></ul>
           </div>
 
           <div class="add-btn-group">
             <div class="add-btn" onclick="showInputBox(0)">
               <span class="plus-sign">+</span>
-              <span>Add Item</span>
             </div>
             <div class="add-btn solid" onclick="hideInputBox(0)">
-              <span>Save Item</span>
+              <span>&check;</span>
             </div>
           </div>
           <div class="add-container">
@@ -53,16 +53,16 @@
               ondrop="drop(event)"
               ondragover="allowDrop(event)"
               ondragenter="dragEnter(1)"
+              ondragleave="dragLeave(event)"
             ></ul>
           </div>
 
           <div class="add-btn-group">
             <div class="add-btn" onclick="showInputBox(1)">
               <span class="plus-sign">+</span>
-              <span>Add Item</span>
             </div>
             <div class="add-btn solid" onclick="hideInputBox(1)">
-              <span>Save Item</span>
+              <span>&check;</span>
             </div>
           </div>
           <div class="add-container">
@@ -83,16 +83,16 @@
               ondrop="drop(event)"
               ondragover="allowDrop(event)"
               ondragenter="dragEnter(2)"
+              ondragleave="dragLeave(event)"
             ></ul>
           </div>
 
           <div class="add-btn-group">
             <div class="add-btn" onclick="showInputBox(2)">
               <span class="plus-sign">+</span>
-              <span>Add Item</span>
             </div>
             <div class="add-btn solid" onclick="hideInputBox(2)">
-              <span>Save Item</span>
+              <span>&check;</span>
             </div>
           </div>
           <div class="add-container">
@@ -113,16 +113,16 @@
               ondrop="drop(event)"
               ondragover="allowDrop(event)"
               ondragenter="dragEnter(3)"
+              ondragleave="dragLeave(event)"
             ></ul>
           </div>
 
           <div class="add-btn-group">
             <div class="add-btn" onclick="showInputBox(3)">
               <span class="plus-sign">+</span>
-              <span>Add Item</span>
             </div>
             <div class="add-btn solid" onclick="hideInputBox(3)">
-              <span>Save Item</span>
+              <span>&check;</span>
             </div>
           </div>
           <div class="add-container">

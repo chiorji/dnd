@@ -183,6 +183,12 @@ const dragEnter = (column) => {
   currentColumn = column;
 };
 
+const dragLeave = (event) => {
+  if (event.target.classList.contains("over")) {
+    event.target.classList.remove("over");
+  }
+};
+
 const drop = (event) => {
   event.preventDefault();
   listColumns.forEach((column) => {
